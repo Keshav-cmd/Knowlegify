@@ -125,7 +125,42 @@ Open "index.html" in your browser.
 Alternatively, use the Live Server extension in Visual Studio Code for local development.
 
 ---
+📱 Android Application
 
+Knowlegify is also available as an Android APK.
+
+APK Location:
+
+knowlegify/app/knowlegify.apk
+
+Installation
+
+1. Download "knowlegify.apk" from the repository.
+2. Open the downloaded APK on your Android device.
+3. Follow Android's installation prompts.
+4. Launch Knowlegify and start exploring.
+
+«Note: Android may ask you to allow installation from your chosen source. Only install APKs from sources you trust.»
+
+Download APK
+
+"Download Knowlegify for Android" (app/knowlegify.apk)
+
+---
+
+📁 Updated Project Structure
+
+Knowlegify/
+│
+├── index.html
+├── styles.css
+├── app.js
+├── README.md
+│
+├── app/
+│   └── knowlegify.apk
+│
+└── assets/
 ⌨️ Keyboard Shortcuts
 
 Shortcut| Function
