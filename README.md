@@ -193,7 +193,7 @@ app/knowlegify.apk
 
 ### Download
 
-[**⬇️ Download Knowlegify for Android**](App/knowlegify.apk)
+[**⬇️ Download Knowlegify for Android**](/Knowlegify/App/knowlegify.apk)
 
 ---
 
