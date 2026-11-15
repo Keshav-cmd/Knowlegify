@@ -1,4 +1,4 @@
-# 🟢 KNOWLEGIFY // RESEARCH TERMINAL
+#  KNOWLEGIFY // RESEARCH TERMINAL
 
 ### Connecting innovators and researchers worldwide.
 
