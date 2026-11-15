@@ -4,6 +4,8 @@
 
 **Discover research. Organize what you learn. Build a lasting learning habit.**
 
+![Knowlegify research and learning platform poster](assets/knowlegify-postee.png)
+
 [Live Preview](https://keshav-cmd.github.io/Knowlegify/) · [Download the Android APK](https://github.com/keshav-cmd/Knowlegify/raw/refs/heads/main/App/Knowlegify.apk)
 
 `learn` · `research` · `innovate` · `collaborate`
