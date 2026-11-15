@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="green">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowlegify // Research Terminal</title>
+<meta name="description" content="Knowlegify — a terminal-styled social learning platform for innovators and researchers.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#viewRoot">Skip to content</a>
+<noscript><div class="noscript">Knowlegify needs JavaScript to run its terminal. Please enable it.</div></noscript>
+
+<!-- BOOT SEQUENCE -->
+<div id="boot" class="boot" role="status" aria-label="Loading">
+  <div class="boot-box">
+    <div class="boot-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="boot-title">knowlegify — boot sequence</span></div>
+    <div id="bootLog" class="boot-log" aria-live="polite"></div>
+    <button id="bootSkip" class="btn ghost sm" type="button">skip_ [esc]</button>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+    </span>
+    <span class="brand-name">knowlegify<span class="cursor" aria-hidden="true">▊</span></span>
+    <span class="brand-sub">research_terminal v2.0</span>
+  </div>
+
+  <nav class="tabs" aria-label="Primary">
+    <button class="tab is-active" data-view="feed" type="button"><span class="k">1</span>Home</button>
+    <button class="tab" data-view="explore" type="button"><span class="k">2</span>Explore library</button>
+    <button class="tab" data-view="my" type="button"><span class="k">3</span>My research</button>
+    <button class="tab" data-view="quizzes" type="button"><span class="k">4</span>Quizzes</button>
+    <button class="tab" data-view="ranks" type="button"><span class="k">5</span>Leaderboard</button>
+  </nav>
+
+  <div class="top-actions">
+    <button id="searchBtn" class="btn ghost sm" type="button" title="Search ( / )">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+      <span class="hide-sm">search</span><kbd>/</kbd>
+    </button>
+    <div class="stat-pill" id="pointsPill" title="Research points">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span id="pointsVal">0</span><span class="dim">pts</span>
+    </div>
+    <div class="stat-pill" id="streakPill" title="Daily streak">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c4.4 0 7-2.8 7-6.5 0-4-3.5-5.5-3.5-9.5-3 1-4.5 3.5-4.5 6-1-.5-1.8-1.5-2-3C7.4 10.5 5 12.6 5 15.5 5 19.2 7.6 22 12 22z"/></svg>
+      <span id="streakVal">0</span>
+    </div>
+    <div class="bell-wrap">
+      <button id="bellBtn" class="btn icon" type="button" title="Notifications" aria-label="Notifications" aria-haspopup="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        <span id="bellBadge" class="badge" hidden>0</span>
+      </button>
+    </div>
+    <div class="avatar-wrap">
+      <button id="avatarBtn" class="avatar" type="button" title="Account" aria-haspopup="true" aria-label="Account menu">?</button>
+      <div id="avatarMenu" class="menu" hidden>
+        <div class="menu-head"><strong id="menuName">guest</strong><span id="menuLevel" class="dim">lvl 1 · novice</span></div>
+        <button type="button" data-act="profile">my stats</button>
+        <button type="button" data-act="settings">settings</button>
+        <button type="button" data-act="export">export data</button>
+        <button type="button" data-act="reset" class="danger">reset terminal</button>
+      </div>
+    </div>
+    <button id="kgpBtn" class="btn primary sm hide-md" type="button" title="Open IIT KGP National Digital Library">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      IIT_KGP.lib
+    </button>
+  </div>
+</header>
+
+<!-- MAIN LAYOUT -->
+<main class="layout">
+  <!-- SIDEBAR : FILE TREE -->
+  <aside class="sidebar" aria-label="Library directories">
+    <div class="side-head"><span class="prompt">Browse by topic</span><span class="dim">Choose a section</span></div>
+    <ul id="tree" class="tree"></ul>
+    <div class="side-head"><span class="prompt">More trusted sources</span></div>
+    <ul class="source-links" aria-label="External research sources">
+      <li><a href="https://ndl.iitkgp.ac.in/ndl_re" target="_blank" rel="noopener noreferrer">Research papers <span>↗</span></a></li>
+      <li><a href="https://ndl.iitkgp.ac.in/ndl_nw" target="_blank" rel="noopener noreferrer">Articles <span>↗</span></a></li>
+      <li><a href="https://openlibrary.org/" target="_blank" rel="noopener noreferrer">Books <span>↗</span></a></li>
+      <li><a href="https://phet.colorado.edu/en/simulations/browse" target="_blank" rel="noopener noreferrer">Experiments &amp; simulations <span>↗</span></a></li>
+      <li><a href="https://ndl.iitkgp.ac.in/" target="_blank" rel="noopener noreferrer">Reports &amp; theses <span>↗</span></a></li>
+      <li><a href="https://www.indiascienceandtechnology.gov.in/mega-science-projects-facilities/" target="_blank" rel="noopener noreferrer">Indian science projects <span>↗</span></a></li>
+      <li><a href="https://ndl.iitkgp.ac.in/ndl_pt" target="_blank" rel="noopener noreferrer">Patents <span>↗</span></a></li>
+    </ul>
+    <div class="side-head"><span class="prompt">Quick tips</span></div>
+    <ul class="keys">
+      <li><kbd>/</kbd> Search resources</li>
+      <li><kbd>1–5</kbd> Switch section</li>
+      <li><kbd>`</kbd> Open command panel</li>
+      <li><kbd>b</kbd> Save current resource</li>
+      <li><kbd>esc</kbd> Close window</li>
+    </ul>
+    <button id="uploadBtn" class="btn primary block" type="button">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      upload_research
+    </button>
+  </aside>
+
+  <!-- CONTENT -->
+  <section class="content" id="viewRoot" tabindex="-1" aria-live="polite"></section>
+
+  <!-- RIGHT RAIL -->
+  <aside class="rail" aria-label="Widgets">
+    <section class="widget" id="goalWidget">
+      <h2><span class="prompt">></span> daily_objective</h2>
+      <div class="goal-row"><span>earn 100 pts</span><span id="goalPtsTxt" class="dim">0/100</span></div>
+      <div class="bar"><i id="goalPtsBar" style="width:0%"></i></div>
+      <div class="goal-row"><span>read 1 resource</span><span id="goalReadTxt" class="dim">0/1</span></div>
+      <div class="bar"><i id="goalReadBar" style="width:0%"></i></div>
+      <p id="goalDone" class="goal-done" hidden>objective complete. +30 bonus claimed.</p>
+    </section>
+
+    <section class="widget" id="focusWidget">
+      <h2><span class="prompt">></span> focus_session <span class="dim">+50</span></h2>
+      <div class="focus-time" id="focusTime">25:00</div>
+      <div class="focus-btns">
+        <select id="focusLen" aria-label="Session length">
+          <option value="900">15 min</option>
+          <option value="1500" selected>25 min</option>
+          <option value="3000">50 min</option>
+        </select>
+        <button id="focusStart" class="btn sm" type="button">start</button>
+        <button id="focusReset" class="btn ghost sm" type="button">reset</button>
+      </div>
+    </section>
+
+    <section class="widget" id="recoWidget">
+      <h2><span class="prompt">></span> recommended</h2>
+      <div id="recoList" class="reco-list"></div>
+    </section>
+
+    <section class="widget" id="miniRanks">
+      <h2><span class="prompt">></span> top_researchers <button class="link" data-goto="ranks" type="button">all_</button></h2>
+      <ol id="miniRankList" class="rank-list"></ol>
+    </section>
+
+    <section class="widget log-widget">
+      <h2><span class="prompt">></span> system_log</h2>
+      <div id="sysLog" class="syslog" aria-live="polite"></div>
+    </section>
+  </aside>
+</main>
+
+<footer class="foot">
+  <span>knowlegify — connecting innovators &amp; researchers worldwide</span>
+  <span class="dim">an invention by KESHAV Jha · © 2026</span>
+</footer>
+
+<!-- CONSOLE -->
+<section id="consolePanel" class="console" hidden aria-label="Terminal console">
+  <div class="console-head">
+    <span class="prompt">visitor@knowlegify</span><span class="dim"> — type `help`</span>
+    <button id="consoleClose" class="btn ghost sm" type="button">close [esc]</button>
+  </div>
+  <div id="consoleLog" class="console-log" aria-live="polite"></div>
+</section>
+<div class="cmdbar">
+  <button id="consoleToggle" class="btn ghost sm" type="button" title="Toggle console (`)">_console</button>
+  <label class="cmd-prompt" for="cmdInput">visitor@knowlegify<span class="dim">:~$</span></label>
+  <input id="cmdInput" type="text" autocomplete="off" spellcheck="false" placeholder='try "help" · "search batteries" · "open 1" · "theme amber"'>
+</div>
+
+<!-- NOTIFICATION DRAWER -->
+<div id="drawerWrap" class="drawer-wrap" hidden>
+  <div class="drawer-backdrop" data-close-drawer></div>
+  <aside class="drawer" role="dialog" aria-label="Notifications">
+    <div class="drawer-head">
+      <h2><span class="prompt">></span> notifications</h2>
+      <div>
+        <button id="markRead" class="btn ghost sm" type="button">mark_read</button>
+        <button class="btn ghost sm" data-close-drawer type="button">close</button>
+      </div>
+    </div>
+    <div id="notifList" class="notif-list"></div>
+  </aside>
+</div>
+
+<!-- MODAL -->
+<div id="modalWrap" class="modal-wrap" hidden>
+  <div class="modal-backdrop" data-close-modal></div>
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Dialog">
+    <div class="modal-head">
+      <span class="prompt" id="modalPrompt">></span><span id="modalTitle" class="modal-title">dialog</span>
+      <button class="btn ghost sm" data-close-modal type="button" aria-label="Close">esc ✕</button>
+    </div>
+    <div id="modalBody" class="modal-body"></div>
+  </div>
+</div>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<input type="file" id="importFile" accept="application/json" hidden>
+
+<script src="app.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","spa":2}' crossorigin="anonymous"></script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5ad25dfdbd55790',t:'MTc5NDczNDA5MA=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5ad25dfdbd55790',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
